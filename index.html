@@ -1,0 +1,1066 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>11/11 限定版媽媽</title>
+<meta name="description" content="有一份禮物要給妳，記得打開聲音。">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1b1220">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="11/11 限定版媽媽">
+<meta property="og:description" content="有一份禮物要給妳，記得打開聲音。">
+<meta property="og:url" content="https://coolalxeanderyi.github.io/Birthday/">
+<meta property="og:image" content="https://coolalxeanderyi.github.io/Birthday/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='14'%20fill='%231b1220'/%3E%3Cpath%20fill='%23f39ab6'%20d='M32%2052C14%2039%209%2029%2012%2021c3-8%2013-10%2020-2%207-8%2017-6%2020%202%203%208-2%2018-20%2031z'/%3E%3C/svg%3E">
+<link rel="preload" href="assets/fonts/bday-round.woff" as="font" type="font/woff" crossorigin>
+<style>
+html, body { margin: 0; overflow: hidden; }
+[hidden] { display: none !important; }
+/* Layout: one full-bleed canvas; the 16:9 film sits inside it on a blurred echo of itself.
+   Landscape keeps captions on the image, portrait moves them under it. UI floats above. */
+@font-face { font-family: "BdayRound"; src: url(assets/fonts/bday-round.woff) format("woff"); font-display: block; }
+@font-face { font-family: "Iansui"; src: url(assets/fonts/iansui-subset.woff) format("woff"); font-display: block; }
+@font-face { font-family: "Pacifico"; src: url(assets/fonts/pacifico-subset.woff) format("woff"); font-display: block; }
+:root {
+  --night: #1b1220;   /* stage ground, plum-black */
+  --plum: #3a2234;    /* button text */
+  --cream: #fff6ee;   /* type */
+  --blush: #f39ab6;   /* accent */
+  --gold: #e9c27b;    /* labels, 11/11 */
+  --scrim: rgba(22, 12, 24, .62);
+  --f-round: "BdayRound", "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --f-hand: "Iansui", "BdayRound", "PingFang TC", "Noto Sans TC", system-ui, sans-serif;
+  --f-script: "Pacifico", "Iansui", cursive;
+  color-scheme: dark;
+}
+html, body { height: 100%; }
+body { background: var(--night); color: var(--cream); overflow: hidden; font-family: var(--f-round);
+  -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none; }
+#stage { position: fixed; inset: 0; width: 100%; height: 100%; display: block; background: var(--night); touch-action: manipulation; }
+#ui { position: fixed; inset: 0; pointer-events: none; display: grid; place-items: center;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-bottom, 0px)); }
+#ui > * { pointer-events: auto; }
+#start { position: fixed; inset: 0; display: grid; place-items: center; text-align: center;
+  background: radial-gradient(ellipse at 50% 55%, rgba(22,12,24,.35) 0%, var(--scrim) 70%);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-bottom, 0px));
+  transition: opacity .6s ease; }
+#start.leaving { opacity: 0; pointer-events: none; }
+.start-inner { display: grid; justify-items: center; gap: clamp(10px, 2.4vh, 20px); max-width: 34rem; }
+.eyebrow { margin: 0; font-family: var(--f-round); color: var(--gold); letter-spacing: .18em; font-size: clamp(13px, 1.9vh, 16px); }
+h1 { margin: 0; font-family: var(--f-hand); font-weight: 400; font-size: clamp(30px, 7.2vh, 60px); line-height: 1.15;
+  text-wrap: balance; text-shadow: 0 2px 18px rgba(20,6,18,.65); }
+#open, #replay { font-family: var(--f-round); font-size: clamp(18px, 2.8vh, 22px); color: var(--plum);
+  background: var(--cream); border: 0; border-radius: 999px; padding: .72em 1.7em; cursor: pointer;
+  box-shadow: 0 10px 30px rgba(10,0,10,.45), 0 0 0 0 rgba(243,154,182,.0); display: inline-flex; align-items: center; gap: .55em;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease; }
+#open svg, #replay svg { width: 1.15em; height: 1.15em; flex: none; }
+#open:not(:disabled):hover, #replay:hover { transform: translateY(-2px); background: #fff; }
+#open:not(:disabled) { animation: breathe 2.4s ease-in-out infinite; }
+#open:disabled { opacity: .75; cursor: progress; }
+#open:focus-visible, #replay:focus-visible { outline: 3px solid var(--blush); outline-offset: 4px; }
+@keyframes breathe { 0%,100% { box-shadow: 0 10px 30px rgba(10,0,10,.45), 0 0 0 0 rgba(243,154,182,.55); }
+  50% { box-shadow: 0 10px 30px rgba(10,0,10,.45), 0 0 0 14px rgba(243,154,182,0); } }
+.note { margin: 0; font-size: clamp(13px, 1.8vh, 15px); color: rgba(255,246,238,.78); display: inline-flex; align-items: center; gap: .45em; }
+.note svg { width: 1.1em; height: 1.1em; }
+.portrait-only { display: none; }
+@media (orientation: portrait) and (max-width: 760px) { .portrait-only { display: inline-flex; } }
+#hint { position: fixed; left: 0; right: 0; bottom: 0; margin: 0; text-align: center; font-family: var(--f-hand);
+  font-size: clamp(17px, 3.4vh, 26px); color: var(--cream); text-shadow: 0 2px 14px rgba(20,6,18,.85);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-bottom: calc(max(16px, env(safe-area-inset-bottom, 0px)) + 4vh); pointer-events: none;
+  animation: hintPulse 1.8s ease-in-out infinite; }
+@media (orientation: landscape) { #hint { top: 0; bottom: auto; padding-bottom: 0; padding-top: calc(max(16px, env(safe-area-inset-top, 0px)) + 3vh); } }
+@keyframes hintPulse { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+#end { position: fixed; left: 0; right: 0; bottom: 0; display: flex; justify-content: center;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-bottom: calc(max(16px, env(safe-area-inset-bottom, 0px)) + 5vh); }
+#probe { position: fixed; visibility: hidden; pointer-events: none; padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px); }
+@media (prefers-reduced-motion: reduce) { #open:not(:disabled), #hint { animation: none; } #start { transition: none; } }
+</style>
+</head>
+<body>
+<canvas id="stage" aria-label="媽媽的 11/11 生日影片"></canvas>
+<div id="ui">
+  <section id="start" aria-labelledby="startTitle">
+    <div class="start-inner">
+      <p class="eyebrow">11/11 限定版</p>
+      <h1 id="startTitle">有一份禮物要給妳</h1>
+      <button id="open" type="button" disabled>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 11h16v9H4zM3 7h18v4H3zM12 7v13M12 7c-1.5-3-5-3.6-5.6-1.6C5.9 7 9.5 7 12 7zm0 0c1.5-3 5-3.6 5.6-1.6C18.1 7 14.5 7 12 7z"/></svg>
+        <span id="openLabel">準備中…</span>
+      </button>
+      <p class="note"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 9.5h3.5L12 5.5v13l-4.5-4H4zM15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>記得打開聲音</p>
+      <p class="note portrait-only">把手機轉橫向，畫面更大</p>
+    </div>
+  </section>
+  <p id="hint" hidden>閉上眼睛許個願，再點一下畫面吹熄蠟燭</p>
+  <div id="end" hidden>
+    <button id="replay" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3M4.5 4.5v4h4"/></svg>再看一次</button>
+  </div>
+</div>
+<div id="probe"></div>
+
+<script>
+(() => {
+'use strict';
+const T = {"A_BEAT1": 0.625, "A1_B0": 1.125, "T_S2": 9.25, "T_S3": 15.25, "PUSHES": [15.25, 16.25, 17.25, 18.25], "T_POINT": 19.25, "T_WHISTLE": 22.25, "T_S4": 23.25, "HOPS4": [24.25, 24.75, 25.25, 25.75], "T_ROLL": 27.25, "T_S5": 29.25, "T_W": 35.25, "A_LEN": 37.25, "LOOP_LEN": 4.0, "B_HIT": 1.0, "B_BEAT": 0.45454545454545453, "B_B0": 2.8181818181818183, "B_PHR3": 8.272727272727273, "B_PHR4": 11.0, "B_FINAL": 12.363636363636363, "B_SONG_END": 13.727272727272727, "S_BEAT": 0.8333333333333334, "S_B11": 14.627272727272727, "S_FINAL": 23.12060606060606, "B_LEN": 29.82060606060606, "FILM_LEN": 69.07060606060605};
+const M = {"s1": {"w": 2560, "h": 2160, "layers": {"box": {"file": "assets/s1_box.webp", "x": 648, "y": 312, "w": 1362, "h": 1691, "px": 1325.0, "py": 1975.0}}, "bg": "assets/s1_bg.webp", "stars": [[730, 500], [864, 496], [780, 596], [1720, 444], [1594, 524], [1690, 560], [736, 1776], [808, 1810], [1652, 1810], [1732, 1870], [1930, 700], [1900, 1100], [1950, 1500], [660, 900], [1150, 470], [1480, 470]]}, "s2": {"w": 2560, "h": 1440, "layers": {"dad": {"file": "assets/s2_dad.webp", "x": 632, "y": 189, "w": 500, "h": 1104, "px": 862.5, "py": 1262.5}, "son": {"file": "assets/s2_son.webp", "x": 1420, "y": 202, "w": 548, "h": 1142, "px": 1712.5, "py": 1312.5}}, "bg": "assets/s2_bg.webp"}, "s3": {"w": 2560, "h": 1440, "layers": {"dadcake": {"file": "assets/s3_dadcake.webp", "x": 408, "y": 183, "w": 1393, "h": 1176, "px": 1050.0, "py": 1300.0}, "son": {"file": "assets/s3_son.webp", "x": 1610, "y": 176, "w": 678, "h": 1096, "px": 1975.0, "py": 1250.0}}, "bg": "assets/s3_bg.webp"}, "s4": {"w": 2560, "h": 1440, "layers": {"dad": {"file": "assets/s4_dad.webp", "x": 552, "y": 305, "w": 578, "h": 984, "px": 805.0, "py": 1262.5}, "son": {"file": "assets/s4_son.webp", "x": 1439, "y": 318, "w": 592, "h": 995, "px": 1762.5, "py": 1262.5}}, "bg": "assets/s4_bg.webp", "lights": [[1025.2, 316.9, 38.4], [2062.7, 77.2, 38.3], [1877.0, 190.6, 38.3], [1302.2, 351.9, 38.0], [571.9, 33.1, 37.8], [712.7, 162.0, 37.8], [1508.8, 333.6, 37.2], [1288.6, 794.4, 36.9], [303.1, 893.7, 33.6], [2013.9, 974.0, 33.0], [1203.5, 799.5, 32.6], [1367.6, 799.1, 32.3], [1364.0, 872.6, 31.4], [1208.0, 860.2, 28.3], [1277.3, 850.3, 22.0], [1266.1, 916.4, 20.6], [1209.6, 912.5, 19.2], [1263.1, 959.8, 17.7], [1159.7, 910.5, 12.3], [1198.4, 923.4, 10.3], [1190.7, 932.5, 7.9], [1341.5, 940.1, 7.9], [1119.3, 940.4, 6.8], [1175.1, 924.7, 6.6], [1360.9, 936.7, 6.5], [1283.5, 982.9, 5.9]]}, "s5": {"w": 2560, "h": 1440, "layers": {"mom": {"file": "assets/s5_mom.webp", "x": 941, "y": 145, "w": 690, "h": 1100, "px": 1280.0, "py": 1220.0}}, "bg": "assets/s5_bg.webp", "lights": [[1899.0, 864.7, 77.5], [360.4, 399.4, 76.7], [1974.8, 722.6, 76.6], [328.9, 911.0, 75.1], [2095.9, 632.7, 75.0], [504.9, 920.7, 74.1], [405.9, 710.8, 72.7], [508.2, 473.8, 69.9], [1773.0, 821.9, 50.2], [329.7, 1081.9, 20.7], [645.4, 270.9, 16.6], [183.7, 1075.6, 10.1], [706.6, 275.4, 8.1], [634.9, 312.0, 6.1]]}, "s6b": {"w": 2560, "h": 1440, "layers": {"dad": {"file": "assets/s6b_dad.webp", "x": 369, "y": 229, "w": 519, "h": 1083, "px": 630.0, "py": 1287.5}, "son": {"file": "assets/s6b_son.webp", "x": 1701, "y": 220, "w": 521, "h": 1091, "px": 1962.5, "py": 1287.5}}, "bg": "assets/s6b_bg.webp", "lights": [[821.4, 168.0, 74.0], [1782.4, 149.2, 73.8], [1511.2, 146.4, 73.6], [1078.7, 140.4, 73.5], [1287.5, 16.7, 51.3], [2007.7, 56.6, 37.0], [1295.1, 568.8, 8.3]]}, "s6a": {"w": 2560, "h": 1440, "lit": "assets/s6a_lit.webp", "blown": "assets/s6a_blown.webp", "flames": [{"x": 1303.3, "y": 1002.7, "h": 127, "top": 935, "wick": [1303, 1048]}, {"x": 1134.2, "y": 1012.4, "h": 129, "top": 942, "wick": [1134, 1057]}], "lights": [[1234.3, 780.4, 196.7], [1726.5, 244.4, 53.2], [934.2, 1245.6, 50.8], [915.7, 1336.6, 45.1], [1708.9, 270.7, 43.4], [1667.3, 310.1, 29.7], [1492.2, 1223.2, 22.1], [1682.1, 1297.9, 18.6], [872.7, 1374.6, 18.5], [1271.0, 778.8, 9.0], [874.5, 1435.0, 8.9]]}, "family": {"file": "assets/family.webp", "w": 2000, "h": 1333}};
+const FILM = !!window.__FILM;
+const W0 = 1920, H0 = 1080, CX = 960, CY = 540;
+const REDUCED = !FILM && !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+const PAR = REDUCED ? 0.35 : 1;
+
+// ------------------------------------------------------------------ math
+const clamp01 = x => x < 0 ? 0 : x > 1 ? 1 : x;
+const lerp = (a, b, p) => a + (b - a) * p;
+const esin = p => 0.5 - 0.5 * Math.cos(Math.PI * clamp01(p));
+const eout = p => 1 - Math.pow(1 - clamp01(p), 3);
+const ein = p => Math.pow(clamp01(p), 3);
+const eback = (p, s = 1.7) => { p = clamp01(p) - 1; return p * p * ((s + 1) * p + s) + 1; };
+const q15 = t => Math.floor(t * 15 + 1e-6) / 15;
+const fadeIO = (t, t0, t1, fi = 0.4, fo = 0.3) => Math.min(clamp01((t - t0) / fi), clamp01((t1 - t) / fo));
+function rng(seed) { let a = seed >>> 0; return () => { a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function keys(t, ks) {
+  if (t <= ks[0][0]) return ks[0].slice(1);
+  for (let i = 0; i < ks.length - 1; i++) {
+    const a = ks[i], b = ks[i + 1];
+    if (t <= b[0]) { const p = esin((t - a[0]) / (b[0] - a[0])); return a.slice(1).map((v, j) => lerp(v, b[j + 1], p)); }
+  }
+  return ks[ks.length - 1].slice(1);
+}
+
+// ------------------------------------------------------------------ canvases
+const main = document.getElementById('stage');
+const mg = main.getContext('2d', { alpha: false });
+const mk = (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
+const S = mk(16, 9), sg = S.getContext('2d');
+const BA = mk(16, 9), ga = BA.getContext('2d');
+const BB = mk(16, 9), gb = BB.getContext('2d');
+const SNAP = mk(16, 9);
+const TINY = mk(96, 54), tg = TINY.getContext('2d');
+tg.imageSmoothingEnabled = true; tg.imageSmoothingQuality = 'high';
+let K = 1, LAY = null, snapDirty = true;
+const textCache = new Map();
+
+function safeInsets() {
+  const cs = getComputedStyle(document.getElementById('probe'));
+  return { t: parseFloat(cs.paddingTop) || 0, r: parseFloat(cs.paddingRight) || 0, b: parseFloat(cs.paddingBottom) || 0, l: parseFloat(cs.paddingLeft) || 0 };
+}
+function layout() {
+  const cw = FILM ? W0 : Math.max(1, window.innerWidth), ch = FILM ? H0 : Math.max(1, window.innerHeight);
+  const dpr = FILM ? 1 : Math.min(window.devicePixelRatio || 1, 2);
+  let mw = Math.round(cw * dpr), mh = Math.round(ch * dpr);
+  const cap = 2560 * 1600;
+  if (mw * mh > cap) { const f = Math.sqrt(cap / (mw * mh)); mw = Math.round(mw * f); mh = Math.round(mh * f); }
+  main.width = mw; main.height = mh;
+  const r = mw / cw;
+  const ins = FILM ? { t: 0, r: 0, b: 0, l: 0 } : safeInsets();
+  const L = ins.l * r, R = ins.r * r, Tp = ins.t * r, Bt = ins.b * r;
+  const aw = mw - L - R, ah = mh - Tp - Bt;
+  const portrait = !FILM && ah > aw * 0.9;
+  let sw, sh, sx, sy;
+  if (portrait) { sw = aw; sh = sw * 9 / 16; sx = L; sy = Tp + ah * 0.38 - sh / 2; }
+  else {
+    if (aw / ah > 16 / 9) { sh = ah; sw = sh * 16 / 9; } else { sw = aw; sh = sw * 9 / 16; }
+    sx = L + (aw - sw) / 2; sy = Tp + (ah - sh) / 2;
+  }
+  const sk = Math.min(1, 2560 / sw);
+  const W = Math.max(16, Math.round(sw * sk)), H = Math.max(9, Math.round(sh * sk));
+  for (const c of [S, BA, BB, SNAP]) { c.width = W; c.height = H; }
+  K = W / W0;
+  const capU = portrait ? Math.max(sh / H0, Math.min(mw / W0 * 2.1, (mh - (sy + sh) - Bt) / 420)) : sh / H0;
+  LAY = { mw, mh, sx, sy, sw, sh, portrait, r, Bt, capU };
+  snapDirty = true; textCache.clear();
+}
+
+// ------------------------------------------------------------------ sprites
+function sprite(w, h, f) { const c = mk(w, h); f(c.getContext('2d'), w, h); return c; }
+function glowSprite(rgb) {
+  return sprite(128, 128, (x) => {
+    const g = x.createRadialGradient(64, 64, 0, 64, 64, 64);
+    g.addColorStop(0, `rgba(${rgb},1)`); g.addColorStop(0.22, `rgba(${rgb},.6)`);
+    g.addColorStop(0.55, `rgba(${rgb},.16)`); g.addColorStop(1, `rgba(${rgb},0)`);
+    x.fillStyle = g; x.fillRect(0, 0, 128, 128);
+  });
+}
+const G_WARM = glowSprite('255,206,150'), G_WHITE = glowSprite('255,250,240'), G_PINK = glowSprite('255,170,200'), G_GOLD = glowSprite('255,224,140');
+const STAR = sprite(128, 128, (x) => {
+  x.translate(64, 64);
+  const g = x.createRadialGradient(0, 0, 0, 0, 0, 34); g.addColorStop(0, 'rgba(255,248,230,.85)'); g.addColorStop(1, 'rgba(255,248,230,0)');
+  x.fillStyle = g; x.beginPath(); x.arc(0, 0, 34, 0, 7); x.fill();
+  x.fillStyle = '#fffdf6';
+  const st = (len, wd) => { x.beginPath(); x.moveTo(0, -len); x.quadraticCurveTo(wd, -wd, len, 0); x.quadraticCurveTo(wd, wd, 0, len); x.quadraticCurveTo(-wd, wd, -len, 0); x.quadraticCurveTo(-wd, -wd, 0, -len); x.fill(); };
+  st(62, 4); x.rotate(Math.PI / 4); st(26, 3);
+});
+const HEART = sprite(128, 128, (x) => {
+  x.translate(64, 70);
+  const path = () => { x.beginPath(); x.moveTo(0, 40); x.bezierCurveTo(-66, -6, -36, -58, 0, -26); x.bezierCurveTo(36, -58, 66, -6, 0, 40); x.closePath(); };
+  path(); x.fillStyle = '#f2789f'; x.fill();
+  const g = x.createRadialGradient(-20, -28, 2, -20, -28, 30); g.addColorStop(0, 'rgba(255,255,255,.65)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+  path(); x.fillStyle = g; x.fill();
+});
+const SMOKE = sprite(96, 96, (x) => {
+  const g = x.createRadialGradient(48, 48, 0, 48, 48, 48);
+  g.addColorStop(0, 'rgba(225,222,230,.55)'); g.addColorStop(0.6, 'rgba(210,205,220,.18)'); g.addColorStop(1, 'rgba(210,205,220,0)');
+  x.fillStyle = g; x.fillRect(0, 0, 96, 96);
+});
+const NOISE = sprite(256, 256, (x) => {
+  const d = x.createImageData(256, 256), r = rng(77);
+  for (let i = 0; i < d.data.length; i += 4) { const v = 96 + r() * 64 | 0; d.data[i] = d.data[i + 1] = d.data[i + 2] = v; d.data[i + 3] = 255; }
+  x.putImageData(d, 0, 0);
+});
+let noisePat = null;
+
+// ------------------------------------------------------------------ text
+const F = { round: 'BdayRound', hand: 'Iansui', script: 'Pacifico' };
+function txt(text, fam, px, o = {}) {
+  px = Math.max(6, Math.round(px));
+  const key = [text, fam, px, o.fill, o.stroke, o.sw, o.shadow, o.glow].join('|');
+  let v = textCache.get(key);
+  if (v) return v;
+  const c = mk(4, 4), x = c.getContext('2d');
+  const font = `${px}px "${F[fam]}", "BdayRound", sans-serif`;
+  x.font = font;
+  const w0 = x.measureText(text).width;
+  const pad = Math.ceil(px * 0.55 + (o.sw || 0) * px);
+  c.width = Math.ceil(w0 + pad * 2); c.height = Math.ceil(px * 1.55 + pad * 2);
+  x.font = font; x.textAlign = 'center'; x.textBaseline = 'middle';
+  const cx = c.width / 2, cy = c.height / 2 + px * 0.05;
+  if (o.shadow) { x.save(); x.shadowColor = o.shadow; x.shadowBlur = px * 0.32; x.shadowOffsetY = px * 0.06; x.fillStyle = o.shadow; x.fillText(text, cx, cy); x.restore(); }
+  if (o.glow) { x.save(); x.shadowColor = o.glow; x.shadowBlur = px * 0.5; x.fillStyle = o.glow; x.fillText(text, cx, cy); x.fillText(text, cx, cy); x.restore(); }
+  if (o.stroke) { x.lineJoin = 'round'; x.lineWidth = o.sw * px; x.strokeStyle = o.stroke; x.strokeText(text, cx, cy); }
+  x.fillStyle = o.fill || '#fff7ef'; x.fillText(text, cx, cy);
+  v = { c, w: c.width, h: c.height, tw: w0 };
+  textCache.set(key, v);
+  return v;
+}
+// draw a text sprite centred at stage units (x,y) on a K-scaled stage context
+function stxt(g, spr, x, y, a = 1, sc = 1, rot = 0) {
+  if (a <= 0.003) return;
+  const w = spr.w / K * sc, h = spr.h / K * sc;
+  g.save(); g.globalAlpha = a; g.translate(x, y); if (rot) g.rotate(rot);
+  g.drawImage(spr.c, -w / 2, -h / 2, w, h); g.restore();
+}
+
+// ------------------------------------------------------------------ assets
+const IMG = {};
+const IMG_LIST = {
+  s1_bg: M.s1.bg, s1_box: M.s1.layers.box.file,
+  s2_bg: M.s2.bg, s2_dad: M.s2.layers.dad.file, s2_son: M.s2.layers.son.file,
+  s3_bg: M.s3.bg, s3_dadcake: M.s3.layers.dadcake.file, s3_son: M.s3.layers.son.file,
+  s4_bg: M.s4.bg, s4_dad: M.s4.layers.dad.file, s4_son: M.s4.layers.son.file,
+  s5_bg: M.s5.bg, s5_mom: M.s5.layers.mom.file,
+  s6a_lit: M.s6a.lit, s6a_blown: M.s6a.blown,
+  s6b_bg: M.s6b.bg, s6b_dad: M.s6b.layers.dad.file, s6b_son: M.s6b.layers.son.file,
+  family: M.family.file,
+};
+function loadImg(key, src) {
+  return new Promise((res, rej) => {
+    const im = new Image();
+    im.onload = () => { IMG[key] = im; (im.decode ? im.decode().catch(() => {}) : Promise.resolve()).then(() => res(im)); };
+    im.onerror = () => rej(new Error('image ' + src));
+    im.src = src;
+  });
+}
+
+// ------------------------------------------------------------------ camera & layers
+function view(pk, cx, cy, vw, shx = 0, shy = 0) {
+  const P = M[pk];
+  vw = Math.min(vw, P.w - 2, (P.h - 2) * 16 / 9);
+  const vh = vw * 9 / 16;
+  cx = Math.min(Math.max(cx, vw / 2 + 1), P.w - vw / 2 - 1);
+  cy = Math.min(Math.max(cy, vh / 2 + 1), P.h - vh / 2 - 1);
+  return { cx: cx + shx, cy: cy + shy, s: W0 / vw };
+}
+const toS = (c, x, y) => [CX + (x - c.cx) * c.s, CY + (y - c.cy) * c.s];
+const fgc = (c, c0, p) => ({ cx: c.cx + (c.cx - c0.cx) * p, cy: c.cy + (c.cy - c0.cy) * p, s: c.s * (1 + p * (c.s / c0.s - 1)) });
+function plate(g, img, c, a = 1) {
+  if (a <= 0) return;
+  g.globalAlpha = a;
+  g.drawImage(img, CX - c.cx * c.s, CY - c.cy * c.s, img.width * c.s, img.height * c.s);
+  g.globalAlpha = 1;
+}
+function layer(g, img, L, c, tf) {
+  const dx = tf ? tf.dx || 0 : 0, dy = tf ? tf.dy || 0 : 0;
+  const [X, Y] = toS(c, L.px + dx, L.py + dy);
+  g.save(); g.translate(X, Y);
+  if (tf && tf.rot) g.rotate(tf.rot);
+  g.scale(c.s * (tf && tf.sx || 1), c.s * (tf && tf.sy || 1));
+  g.drawImage(img, L.x - L.px, L.y - L.py, L.w, L.h);
+  g.restore();
+}
+function contact(g, c, L, lift, k = 1) {
+  const [X, Y] = toS(c, L.px, L.py - 6);
+  const rx = L.w * 0.3 * c.s * (1 - 0.32 * lift) * k, ry = L.w * 0.055 * c.s * (1 - 0.32 * lift) * k;
+  const a = 0.36 * (1 - 0.55 * lift);
+  g.save(); g.translate(X, Y); g.scale(1, ry / rx);
+  const gr = g.createRadialGradient(0, 0, 0, 0, 0, rx);
+  gr.addColorStop(0, `rgba(20,8,14,${a})`); gr.addColorStop(1, 'rgba(20,8,14,0)');
+  g.fillStyle = gr; g.beginPath(); g.arc(0, 0, rx, 0, 7); g.fill(); g.restore();
+}
+function hop(t, t0, dur, h) {
+  const u = (t - t0) / dur;
+  if (u < -0.22 || u > 1.2) return null;
+  if (u < 0) { const k = Math.sin((u + 0.22) / 0.22 * Math.PI); return { dy: 0, sx: 1 + 0.05 * k, sy: 1 - 0.07 * k, lift: 0 }; }
+  if (u <= 1) { const y = 4 * u * (1 - u); return { dy: -h * y, sx: 1 - 0.035 * y, sy: 1 + 0.06 * y, lift: y }; }
+  const k = Math.sin((u - 1) / 0.2 * Math.PI); return { dy: 0, sx: 1 + 0.05 * k, sy: 1 - 0.06 * k, lift: 0 };
+}
+function hops(t, list, dur, h) { let r = null; for (const t0 of list) { const v = hop(t, t0, dur, h); if (v) r = v; } return r || { dy: 0, sx: 1, sy: 1, lift: 0 }; }
+function glowAt(g, spr, X, Y, size, a) {
+  if (a <= 0.004 || size < 2) return;
+  g.globalCompositeOperation = 'lighter'; g.globalAlpha = Math.min(1, a);
+  g.drawImage(spr, X - size / 2, Y - size / 2, size, size);
+  g.globalAlpha = 1; g.globalCompositeOperation = 'source-over';
+}
+function twinkle(g, c, lights, t, seed, inten, spr = G_WARM, k = 2.6) {
+  const r = rng(seed);
+  for (const [x, y, rr] of lights) {
+    const ph = r() * 10, f = 0.3 + r() * 0.6;
+    const s = 0.5 + 0.5 * Math.sin(2 * Math.PI * f * t + ph);
+    const [X, Y] = toS(c, x, y);
+    glowAt(g, spr, X, Y, (rr * k + 24) * c.s * 2, inten * s * s);
+  }
+}
+function sparkles(g, pts, t, seed, inten = 0.9, size = [40, 90], rate = [0.4, 0.9]) {
+  const r = rng(seed);
+  g.globalCompositeOperation = 'lighter';
+  for (const [X, Y] of pts) {
+    const f = rate[0] + r() * (rate[1] - rate[0]), ph = r(), sz = size[0] + r() * (size[1] - size[0]);
+    const v = Math.pow(Math.max(0, Math.sin(2 * Math.PI * (f * t + ph))), 4);
+    if (v < 0.01) continue;
+    const s = sz * (0.7 + 0.3 * v);
+    g.globalAlpha = inten * v; g.drawImage(STAR, X - s / 2, Y - s / 2, s, s);
+  }
+  g.globalAlpha = 1; g.globalCompositeOperation = 'source-over';
+}
+function motes(g, t, n, seed, k = 1) {
+  const r = rng(seed);
+  for (let i = 0; i < n; i++) {
+    const x0 = r() * W0, y0 = r() * H0, vx = (r() - 0.5) * 14, vy = -4 - r() * 12, sz = 6 + r() * 18, a = 0.05 + r() * 0.16, f = 0.2 + r() * 0.4, ph = r() * 6;
+    const X = ((x0 + vx * t) % (W0 + 80) + W0 + 80) % (W0 + 80) - 40, Y = ((y0 + vy * t) % (H0 + 80) + H0 + 80) % (H0 + 80) - 40;
+    glowAt(g, G_WARM, X, Y, sz, a * k * (0.6 + 0.4 * Math.sin(2 * Math.PI * f * t + ph)));
+  }
+}
+
+// ------------------------------------------------------------------ doodles (hand-drawn strokes in plate px)
+function wob(pts, amp, seed) {
+  const r = rng(seed), p1 = r() * 6, p2 = r() * 6, p3 = r() * 6, p4 = r() * 6;
+  return pts.map(([x, y], i) => [x + amp * (Math.sin(i * 0.55 + p1) + 0.5 * Math.sin(i * 1.3 + p2)), y + amp * (Math.sin(i * 0.6 + p3) + 0.5 * Math.sin(i * 1.1 + p4))]);
+}
+function dd(pts) { const L = [0]; for (let i = 1; i < pts.length; i++) L.push(L[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1])); return { pts, L, total: L[L.length - 1] }; }
+const bez = (a, b, c, n = 26) => Array.from({ length: n + 1 }, (_, i) => { const t = i / n, u = 1 - t; return [u * u * a[0] + 2 * u * t * b[0] + t * t * c[0], u * u * a[1] + 2 * u * t * b[1] + t * t * c[1]]; });
+const arcP = (cx, cy, rx, ry, a0, a1, n = 30) => Array.from({ length: n + 1 }, (_, i) => { const a = (a0 + (a1 - a0) * i / n) * Math.PI / 180; return [cx + rx * Math.cos(a), cy + ry * Math.sin(a)]; });
+function arrow(a, b, c, head = 34, seed = 1) {
+  const shaft = wob(bez(a, b, c), 2.2, seed);
+  const n = shaft.length, e = shaft[n - 1], p = shaft[n - 4];
+  const ang = Math.atan2(e[1] - p[1], e[0] - p[0]);
+  const h1 = [e[0] - head * Math.cos(ang - 0.5), e[1] - head * Math.sin(ang - 0.5)], h2 = [e[0] - head * Math.cos(ang + 0.5), e[1] - head * Math.sin(ang + 0.5)];
+  return [dd(shaft), dd([h1, e, h2])];
+}
+const starP = (cx, cy, r) => Array.from({ length: 11 }, (_, i) => { const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r * 0.45 : r; return [cx + rr * Math.cos(a), cy + rr * Math.sin(a)]; });
+function stroke(g, d, c, p, a = 1, wpx = 7) {
+  if (p <= 0 || a <= 0.01) return;
+  const lim = d.total * clamp01(p);
+  g.beginPath();
+  for (let i = 0; i < d.pts.length; i++) {
+    let [x, y] = d.pts[i];
+    if (i > 0 && d.L[i] > lim) { const [px, py] = d.pts[i - 1], f = (lim - d.L[i - 1]) / (d.L[i] - d.L[i - 1] || 1); x = px + (x - px) * f; y = py + (y - py) * f; }
+    const [X, Y] = toS(c, x, y);
+    if (i === 0) g.moveTo(X, Y); else g.lineTo(X, Y);
+    if (d.L[i] > lim) break;
+  }
+  g.save(); g.lineCap = 'round'; g.lineJoin = 'round'; g.globalAlpha = a;
+  g.shadowColor = 'rgba(38,12,32,.42)'; g.shadowBlur = 5 * K; g.shadowOffsetX = 2 * K; g.shadowOffsetY = 3 * K;
+  g.strokeStyle = '#fffaf2'; g.lineWidth = wpx; g.stroke(); g.restore();
+}
+function strokes(g, list, c, t, t0, dur, a, wpx) { // draw a list sequentially over dur
+  const tot = list.reduce((s, d) => s + d.total, 0); let acc = 0;
+  for (const d of list) { const p0 = acc / tot, p1 = (acc + d.total) / tot; stroke(g, d, c, ((t - t0) / dur - p0) / (p1 - p0), a, wpx); acc += d.total; }
+}
+function label(g, text, c, x, y, t, t0, t1, px = 56, fam = 'hand') {
+  const a = fadeIO(t, t0, t1, 0.25, 0.3);
+  if (a <= 0) return;
+  const sc = 0.82 + 0.18 * eback((t - t0) / 0.35, 2.2);
+  const [X, Y] = toS(c, x, y);
+  stxt(g, txt(text, fam, px * K, { fill: '#fffaf2', shadow: 'rgba(38,12,32,.7)' }), X, Y, a, sc, -0.03);
+}
+
+// doodle geometry
+const D1_ARROW = arrow([712, 956], [850, 892], [918, 1026], 40, 3);
+const D1_STARS = [dd(wob(starP(372, 838, 34), 1.2, 4)), dd(wob(starP(742, 818, 24), 1, 5))];
+const D2_BUBBLE = [dd(wob(arcP(2090, 420, 215, 122, 128, 488, 60), 2.2, 6)), dd(wob([[1958, 510], [1845, 625], [2012, 535]], 1.6, 7))];
+const D2_ARCS = [52, 82, 112].map((r, i) => dd(wob(arcP(706, 430, r, r * 1.1, 150, 210, 14), 1.2, 10 + i)));
+const D3_DAD = arrow([1112, 352], [1042, 344], [1012, 428], 34, 11);
+const D3_SON = arrow([1688, 318], [1742, 282], [1808, 352], 34, 12);
+const D3_SWEAT = [[1000, 300], [1050, 368]].map(([x, y], i) => dd(wob([[x, y - 26], ...arcP(x, y, 13, 13, -60, 240, 16), [x, y - 26]], 0.8, 20 + i)));
+const D3_BULB = [dd(wob(arcP(2290, 228, 54, 58, 120, 420, 40), 1.4, 30)), dd(wob([[2266, 292], [2314, 292]], 0.8, 31)), dd(wob([[2270, 314], [2310, 314]], 0.8, 32)),
+  ...[-150, -110, -70, -30, 10, 190].map((a, i) => { const r0 = 82, r1 = 112, rad = a * Math.PI / 180; return dd(wob([[2290 + r0 * Math.cos(rad), 228 + r0 * Math.sin(rad)], [2290 + r1 * Math.cos(rad), 228 + r1 * Math.sin(rad)]], 0.6, 40 + i)); })];
+const D4_RAYS = [-160, -135, -112, -90, -68, -45, -20].map((a, i) => { const rad = a * Math.PI / 180; return dd(wob([[1295 + 330 * Math.cos(rad), 890 + 300 * Math.sin(rad)], [1295 + 410 * Math.cos(rad), 890 + 372 * Math.sin(rad)]], 0.8, 50 + i)); });
+const D4_STARS = [[1150, 470, 22], [1440, 470, 22], [1295, 412, 27]].map(([x, y, r], i) => dd(wob(starP(x, y, r), 1, 60 + i)));
+const D6_CROWN = [dd(wob([[1205, 262], [1222, 165], [1262, 222], [1300, 140], [1338, 222], [1378, 165], [1395, 262], [1205, 262]], 1.6, 70))];
+const D6_STAR = dd(wob(starP(1612, 116, 26), 1, 71));
+
+// ------------------------------------------------------------------ confetti (stage units, analytic motion)
+const CONF_COLORS = ['#ff9fbb', '#ffd56e', '#9fe0ff', '#b9ef9f', '#c9a8ff', '#fff8f0', '#ffb27a', '#f7e3a1', '#ff7fa6'];
+function confetti(o) {
+  const r = rng(o.seed), n = o.n, P = [];
+  for (let i = 0; i < n; i++) {
+    let x0, y0, ang;
+    if (o.area) { x0 = o.area[0] + r() * (o.area[1] - o.area[0]); y0 = -40 - r() * 120; ang = 80 + r() * 20; }
+    else { const og = o.origins[Math.floor(r() * o.origins.length)]; x0 = og[0] + (r() - 0.5) * 50; y0 = og[1] + (r() - 0.5) * 30; ang = og[2] + r() * (og[3] - og[2]); }
+    const sp = o.speed[0] + r() * (o.speed[1] - o.speed[0]), w = 14 + r() * 13;
+    P.push({ x0, y0, vx: Math.cos(ang * Math.PI / 180) * sp, vy: Math.sin(ang * Math.PI / 180) * sp, k: o.drag[0] + r() * (o.drag[1] - o.drag[0]), w, h: w * (0.38 + r() * 0.22),
+      r0: r() * 6.28, rs: (r() - 0.5) * 18, fl: 4 + r() * 7, f0: r() * 6.28, sw: 15 + r() * 30, sf: 1.2 + r() * 1.4, sp0: r() * 6.28,
+      col: CONF_COLORS[Math.floor(r() * CONF_COLORS.length)], delay: (o.spawn || 0) * r(), round: r() < 0.22 });
+  }
+  return { t0: o.t0, life: o.life, P, g: 1500 };
+}
+function drawConfetti(g, C, t) {
+  const base = t - C.t0;
+  if (base < 0 || base > C.life + 6) return;
+  for (const p of C.P) {
+    const tau = base - p.delay;
+    if (tau <= 0 || tau > C.life) continue;
+    const e = 1 - Math.exp(-p.k * tau), term = C.g / p.k;
+    const x = p.x0 + p.vx / p.k * e + p.sw * Math.sin(p.sf * 6.283 * tau + p.sp0) * (1 - Math.exp(-2 * tau));
+    const y = p.y0 + (p.vy - term) / p.k * e + term * tau;
+    if (x < -60 || x > W0 + 60 || y < -80 || y > H0 + 60) continue;
+    const fl = Math.cos(p.f0 + p.fl * tau), rot = p.r0 + p.rs * tau;
+    const a = Math.min(1, (C.life - tau) / 0.6);
+    g.save(); g.globalAlpha = a; g.translate(x, y); g.rotate(rot); g.scale(1, Math.max(0.15, Math.abs(fl)));
+    g.fillStyle = p.col;
+    if (p.round) { g.beginPath(); g.arc(0, 0, p.w * 0.32, 0, 7); g.fill(); }
+    else g.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+    if (fl < 0) { g.fillStyle = 'rgba(0,0,0,.18)'; if (p.round) { g.beginPath(); g.arc(0, 0, p.w * 0.32, 0, 7); g.fill(); } else g.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); }
+    g.restore();
+  }
+}
+const CF5 = confetti({ t0: T.T_S5, n: 170, seed: 51, origins: [[-20, 1100, -78, -40], [1940, 1100, -140, -102]], speed: [1300, 2300], drag: [2.4, 3.6], life: 6.2 });
+const CF5b = confetti({ t0: T.T_S5 + 0.05, n: 70, seed: 52, origins: [[960, -40, 60, 120]], speed: [200, 700], drag: [2.4, 3.6], life: 6 });
+const CF6 = confetti({ t0: T.B_HIT, n: 160, seed: 61, origins: [[-20, 1100, -80, -42], [1940, 1100, -138, -100]], speed: [1300, 2300], drag: [2.4, 3.6], life: 6.4 });
+const RAIN6 = confetti({ t0: T.B_HIT + 0.3, n: 140, seed: 62, area: [-40, W0 + 40], speed: [0, 60], drag: [3, 4.2], life: 4.2, spawn: 6 });
+const RAINP = confetti({ t0: T.B_FINAL - 0.05, n: 120, seed: 63, area: [-40, W0 + 40], speed: [0, 60], drag: [3, 4.2], life: 4, spawn: 1.6 });
+
+// ------------------------------------------------------------------ scenes
+function camS1(t) {
+  let k = keys(t, [[0, 1290, 1080, 2560], [8.95, 1300, 1010, 2080]]);
+  if (t > 8.95) { const p = ein((t - 8.95) / 0.3); k = [lerp(k[0], 1282, p), lerp(k[1], 1046, p), lerp(k[2], 1180, p)]; }
+  return view('s1', k[0], k[1], k[2]);
+}
+function sceneS1(g, t, tw) {
+  const c = camS1(t), f = fgc(c, camS1(0), 0.14 * PAR);
+  plate(g, IMG.s1_bg, c);
+  const [lx, ly] = toS(c, 380, 170);
+  glowAt(g, G_WARM, lx, ly, 900 * c.s, 0.12 + 0.03 * Math.sin(tw * 1.3));
+  layer(g, IMG.s1_box, M.s1.layers.box, f);
+  sparkles(g, M.s1.stars.map(([x, y]) => toS(f, x, y)), tw, 11, 1.0, [50, 105], [0.35, 0.7]);
+  motes(g, tw, 22, 7, 0.9);
+  const da = 1 - clamp01((t - 8.6) / 0.3);
+  if (t > 4.4 && da > 0) {
+    strokes(g, D1_ARROW, f, t, 4.4, 0.45, da);
+    label(g, /*CHARS:hand*/'今天的主角', f, 540, 925, t, 4.55, 8.9, 64);
+    strokes(g, D1_STARS, f, t, 4.7, 0.3, da, 5);
+  }
+}
+
+function camS2(t) {
+  const l = t - T.T_S2;
+  const k = keys(l, [[0, 1700, 650, 1560], [1.4, 1700, 650, 1560], [5.7, 1300, 730, 2440], [6.4, 1300, 730, 2440]]);
+  if (l < 0.42) k[2] /= 1 + 0.16 * (1 - eout(l / 0.42));
+  return view('s2', k[0], k[1], k[2]);
+}
+function sceneS2(g, t) {
+  const l = t - T.T_S2, c = camS2(t), f = fgc(c, camS2(T.T_S2 + 0.42), 0.1 * PAR), lq = q15(l);
+  plate(g, IMG.s2_bg, c);
+  const [lx, ly] = toS(c, 330, 140);
+  glowAt(g, G_WARM, lx, ly, 760 * c.s, 0.1);
+  const lean = keys(lq, [[0, 0], [1.9, 0], [2.3, 1], [2.9, 1], [3.25, 0], [3.9, 0], [4.3, 1], [4.9, 1], [5.25, 0]])[0];
+  layer(g, IMG.s2_dad, M.s2.layers.dad, f, { rot: -0.075 * lean, dx: -16 * lean });
+  const bob = l > 2 ? Math.pow(Math.max(0, Math.sin(Math.PI * 2 * (lq - 2) / 1.0)), 2) : 0;
+  layer(g, IMG.s2_son, M.s2.layers.son, f, { dy: -7 * bob, sy: 1 + 0.01 * bob });
+  motes(g, t, 18, 8, 0.7);
+  const ba = 1 - clamp01((l - 2.55) / 0.3);
+  if (ba > 0) {
+    strokes(g, D2_BUBBLE, f, l, 0.12, 0.38, ba);
+    const [bx, by] = toS(f, 2090, 420);
+    const a = Math.min(ba, clamp01((l - 0.38) / 0.12));
+    stxt(g, txt(/*CHARS:hand*/'噓——', 'hand', 84 * K, { fill: '#fffaf2', shadow: 'rgba(38,12,32,.6)' }), bx, by, a, 0.85 + 0.15 * eback((l - 0.38) / 0.3, 2.4));
+  }
+  for (const s0 of [2.05, 4.05]) {
+    const a = 1 - clamp01((l - (s0 + 0.95)) / 0.2);
+    if (l > s0 && a > 0) for (const d of D2_ARCS) stroke(g, d, f, (l - s0) / 0.22, a, 6);
+  }
+}
+
+function camS3(t) {
+  const l = t - T.T_S3;
+  const k = keys(l, [[0, 880, 760, 1900], [3.55, 980, 760, 1850], [4.25, 1880, 660, 1850], [6.9, 1600, 720, 2380], [8.3, 1560, 720, 2420]]);
+  let sx = 0, sy = 0;
+  for (const p of T.PUSHES) { const d = t - p; if (d >= 0 && d < 0.6) { const a = 7 * (1 - d / 0.6) * PAR; sx += a * Math.sin(d * 6.283 * 13); sy += a * 0.6 * Math.sin(d * 6.283 * 17 + 1); } }
+  return view('s3', k[0], k[1], k[2], sx, sy);
+}
+function sceneS3(g, t) {
+  const l = t - T.T_S3, c = camS3(t), f = fgc(c, camS3(T.T_S3), 0.1 * PAR), lq = q15(l);
+  plate(g, IMG.s3_bg, c);
+  const [lx, ly] = toS(c, 250, 160);
+  glowAt(g, G_WARM, lx, ly, 820 * c.s, 0.1);
+  let off = 0, bump = 0;
+  for (const p of T.PUSHES) { const d = lq - (p - T.T_S3); off += 9 * eout(d / 0.14); if (d >= 0 && d < 0.3) bump = Math.max(bump, Math.sin(Math.PI * d / 0.3)); }
+  layer(g, IMG.s3_dadcake, M.s3.layers.dadcake, f, { dx: off, rot: 0.014 * bump, sx: 1 + 0.02 * bump, sy: 1 - 0.018 * bump });
+  const h = hops(lq, [4.0, 7.0], 0.38, 26);
+  const idle = l < 4 ? Math.pow(Math.max(0, Math.sin(Math.PI * lq)), 2) * 5 : 0;
+  contact(g, f, M.s3.layers.son, h.lift);
+  layer(g, IMG.s3_son, M.s3.layers.son, f, { dy: h.dy - idle, sx: h.sx, sy: h.sy });
+  motes(g, t, 16, 9, 0.6);
+  // labels
+  strokes(g, D3_DAD, f, l, 0.45, 0.35, 1 - clamp01((l - 3.6) / 0.3));
+  label(g, /*CHARS:hand*/'爸爸：負責出力', f, 1335, 322, l, 0.6, 3.9, 60);
+  for (const p of T.PUSHES) { const d = l - (p - T.T_S3); if (d > 0 && d < 0.5) for (const s of D3_SWEAT) stroke(g, s, f, d / 0.12, 1 - clamp01((d - 0.32) / 0.18), 5); }
+  strokes(g, D3_SON, f, l, 4.1, 0.35, 1 - clamp01((l - 7.5) / 0.3));
+  label(g, /*CHARS:hand*/'我：負責出主意', f, 1462, 292, l, 4.25, 7.8, 60);
+  if (l > 4.05) {
+    const a = 1 - clamp01((l - 7.5) / 0.3);
+    const [bx, by] = toS(f, 2290, 228);
+    glowAt(g, G_GOLD, bx, by, 300 * f.s, a * (0.35 + 0.15 * Math.sin(l * 9)) * clamp01((l - 4.4) / 0.2));
+    strokes(g, D3_BULB, f, l, 4.05, 0.42, a, 6);
+  }
+}
+
+function camS4(t) {
+  const l = t - T.T_S4;
+  const k = keys(l, [[0, 1280, 720, 2560], [4.0, 1290, 780, 2250], [5.98, 1290, 800, 1960]]);
+  let sx = 0, sy = 0;
+  if (l > 4) { const a = 3.5 * PAR * clamp01((l - 4) / 2); sx = a * Math.sin(l * 71); sy = a * Math.sin(l * 53 + 1); }
+  return view('s4', k[0], k[1], k[2], sx, sy);
+}
+function sceneS4(g, t) {
+  const l = t - T.T_S4, c = camS4(t), f = fgc(c, camS4(T.T_S4), 0.1 * PAR), tq = q15(t);
+  plate(g, IMG.s4_bg, c);
+  twinkle(g, c, M.s4.lights, t, 4, 0.28 + 0.25 * clamp01((l - 4) / 2));
+  const hd = hops(tq, [T.HOPS4[0], T.HOPS4[2]], 0.36, 40), hs = hops(tq, [T.HOPS4[1], T.HOPS4[3]], 0.36, 40);
+  contact(g, f, M.s4.layers.dad, hd.lift); layer(g, IMG.s4_dad, M.s4.layers.dad, f, hd);
+  contact(g, f, M.s4.layers.son, hs.lift); layer(g, IMG.s4_son, M.s4.layers.son, f, hs);
+  const a = 1 - clamp01((l - 2.6) / 0.35);
+  if (a > 0) { for (const d of D4_RAYS) stroke(g, d, f, (l - 0.3) / 0.25, a, 6); strokes(g, D4_STARS, f, l, 0.45, 0.35, a, 5); }
+  if (l < 2.4) { const r = rng(44); const pts = Array.from({ length: 18 }, () => [150 + r() * 1620, 120 + r() * 780]); sparkles(g, pts, t, 45, 1 - ein(l / 2.4), [40, 90], [0.8, 1.6]); }
+}
+
+function camS5(t) {
+  const l = t - T.T_S5;
+  if (l < 0.35) return view('s5', 1270, 640, 2300 - 250 * eout(l / 0.35));
+  const k = keys(l, [[0.35, 1270, 640, 2050], [4.0, 1270, 610, 1980], [6.2, 1272, 600, 1900]]);
+  return view('s5', k[0], k[1], k[2]);
+}
+function sceneS5(g, t) {
+  const l = t - T.T_S5, c = camS5(t), lq = q15(l);
+  plate(g, IMG.s5_bg, c);
+  twinkle(g, c, M.s5.lights, t, 5, 0.22, G_WARM);
+  const r = rng(55); sparkles(g, Array.from({ length: 14 }, () => [250 + r() * 1420, 80 + r() * 620]), t, 56, 0.85, [40, 90], [0.6, 1.2]);
+  const pop = lq < 0.5 ? 0.84 + 0.16 * eback(lq / 0.45, 2.6) : 1;
+  const h = hops(lq, [1.0, 2.0, 3.0], 0.34, 16);
+  contact(g, c, M.s5.layers.mom, h.lift, 0.9);
+  layer(g, IMG.s5_mom, M.s5.layers.mom, c, { dy: h.dy, sx: pop * h.sx, sy: pop * h.sy });
+  // Surprise!
+  const word = /*CHARS:script*/'Surprise!';
+  const st = l - 0.08, out = clamp01((l - 3.6) / 0.3);
+  if (st > 0 && out < 1) {
+    const cols = ['#f0628f', '#f5904b', '#efb92e', '#7cbf5e', '#46a9d4', '#6f7fe0', '#a46ad6', '#f0628f', '#f5904b'];
+    const adv = surpriseAdv(word);
+    let x = 960 - adv.total / 2;
+    for (let i = 0; i < word.length; i++) {
+      const ch = word[i], a1 = adv.a[i];
+      const tt = st - i * 0.045;
+      if (tt > 0) {
+        const sc = (0.3 + 0.7 * eback(tt / 0.32, 2.4)) * (1 - 0.2 * out);
+        const wig = 4 * Math.sin(6.283 * 0.9 * l + i * 0.7);
+        stxt(g, txt(ch, 'script', 170 * K, { fill: '#fff8f2', stroke: cols[i], sw: 0.1, shadow: 'rgba(40,10,30,.55)' }), x + a1 / 2, 905 + wig, clamp01(tt / 0.08) * (1 - out), sc);
+      }
+      x += a1;
+    }
+  }
+}
+
+let advCache = null;
+function surpriseAdv(word) {
+  if (advCache && advCache.K === K) return advCache;
+  const x = mk(4, 4).getContext('2d'); x.font = `${Math.round(170 * K)}px "Pacifico", sans-serif`;
+  const a = [...word].map(ch => x.measureText(ch).width / K);
+  advCache = { K, a, total: a.reduce((p, v) => p + v, 0) };
+  return advCache;
+}
+function camW(w) { const k = keys(w, [[0, 1280, 770, 2560], [6, 1276, 790, 2280], [16, 1275, 800, 2150]]); return view('s6a', k[0], k[1], k[2]); }
+function sceneW(g, w, tb, hint) {
+  const c = camW(Math.max(0, w));
+  const blown = tb == null ? 0 : clamp01((tb - 0.26) / 0.3);
+  plate(g, IMG.s6a_lit, c);
+  if (blown > 0) plate(g, IMG.s6a_blown, c, blown);
+  twinkle(g, c, M.s6a.lights, w, 6, 0.1 * (1 - 0.4 * blown), G_WARM, 1.0);
+  const out = tb == null ? 0 : eout(tb / 0.42);
+  M.s6a.flames.forEach((fl, j) => {
+    const flick = 0.75 + 0.15 * Math.sin(w * 23 + j) + 0.1 * Math.sin(w * 37 + 2 * j);
+    const lean = tb == null ? 0 : 26 * eout(tb / 0.3);
+    const [X, Y] = toS(c, fl.x + lean, fl.y);
+    const k = (1 - out);
+    glowAt(g, G_WARM, X, Y, 420 * c.s, 0.4 * flick * k);
+    glowAt(g, G_WHITE, X, Y - 10 * c.s, 120 * c.s, 0.45 * flick * k);
+    if (tb != null && tb > 0.4) {
+      const r = rng(90 + j);
+      for (let i = 0; i < 16; i++) {
+        const b = 0.42 + r() * 0.9, d = tb - b;
+        if (d <= 0 || d > 2.6) continue;
+        const x = fl.wick[0] + Math.sin(d * (1.6 + r()) + r() * 6) * (10 + 26 * d) + 18 * d, y = fl.wick[1] - (55 + 30 * r()) * d - 8;
+        const [sx, sy] = toS(c, x, y), sz = (26 + 70 * d) * c.s;
+        g.globalAlpha = 0.45 * Math.min(1, d / 0.2) * (1 - d / 2.6);
+        g.drawImage(SMOKE, sx - sz / 2, sy - sz / 2, sz, sz);
+      }
+      g.globalAlpha = 1;
+    }
+  });
+  if (hint) {
+    const [X, Y] = toS(c, 1220, 1000);
+    g.save(); g.setLineDash([2, 16]); g.lineCap = 'round'; g.lineWidth = 6; g.strokeStyle = '#fffaf2';
+    g.globalAlpha = 0.45 + 0.35 * Math.sin(w * 4); g.lineDashOffset = -w * 30;
+    g.beginPath(); g.ellipse(X, Y, 250 * c.s, 200 * c.s, 0, 0, 7); g.stroke(); g.restore();
+  }
+}
+
+function camS6b(tb) { const k = keys(tb - T.B_HIT, [[0, 1280, 700, 2560], [7.2, 1285, 690, 2300]]); return view('s6b', k[0], k[1], k[2]); }
+function sceneS6b(g, tb) {
+  const c = camS6b(tb), f = fgc(c, camS6b(T.B_HIT), 0.1 * PAR), tq = q15(tb), BB4 = T.B_BEAT * 3;
+  plate(g, IMG.s6b_bg, c);
+  twinkle(g, c, M.s6b.lights, tb, 7, 0.3);
+  const r = rng(66); sparkles(g, Array.from({ length: 16 }, () => [150 + r() * 1620, 60 + r() * 760]), tb, 67, 0.8, [40, 90], [0.5, 1.1]);
+  const hd = hops(tq, [T.B_B0, T.B_B0 + 2 * BB4], 0.34, 30), hs = hops(tq, [T.B_B0 + BB4, T.B_B0 + 3 * BB4], 0.34, 30);
+  contact(g, f, M.s6b.layers.dad, hd.lift); layer(g, IMG.s6b_dad, M.s6b.layers.dad, f, hd);
+  contact(g, f, M.s6b.layers.son, hs.lift); layer(g, IMG.s6b_son, M.s6b.layers.son, f, hs);
+  if (tb > 2.0) {
+    strokes(g, D6_CROWN, c, tb, 2.0, 0.45, 1, 7);
+    const [X, Y] = toS(c, 1300, 200);
+    glowAt(g, G_GOLD, X, Y, 420 * c.s, 0.18 * clamp01((tb - 2.4) / 0.3));
+    label(g, /*CHARS:hand*/'壽星', c, 1505, 188, tb, 2.3, 99, 62);
+    stroke(g, D6_STAR, c, (tb - 2.5) / 0.25, 1, 5);
+  }
+  drawConfetti(g, RAIN6, tb);
+  drawConfetti(g, CF6, tb);
+}
+
+// polaroids + ending
+const CARD = { w: 840, h: 600, wx: 20, wy: 20, ww: 800, wh: 450 };
+const CA = { x: 530, y: 470, r: -5 * Math.PI / 180 }, CBF = { x: 1400, y: 500, r: 4 * Math.PI / 180 };
+const FAM_SRC = [0, 40, 2000, 1125];
+function drawCard(g, x, y, s, r, photo, cap, capP) {
+  g.save(); g.translate(x, y); g.rotate(r); g.scale(s, s); g.translate(-CARD.w / 2, -CARD.h / 2);
+  g.save(); g.shadowColor = 'rgba(12,2,10,.5)'; g.shadowBlur = 34 * K * s; g.shadowOffsetY = 14 * K * s;
+  g.fillStyle = '#f7f1e9'; g.fillRect(0, 0, CARD.w, CARD.h); g.restore();
+  const gr = g.createLinearGradient(0, 0, 0, CARD.h); gr.addColorStop(0, 'rgba(255,255,255,.5)'); gr.addColorStop(1, 'rgba(200,185,170,.18)');
+  g.fillStyle = gr; g.fillRect(0, 0, CARD.w, CARD.h);
+  g.save(); g.beginPath(); g.rect(CARD.wx, CARD.wy, CARD.ww, CARD.wh); g.clip(); photo(g); g.restore();
+  g.strokeStyle = 'rgba(60,40,40,.18)'; g.lineWidth = 1.5; g.strokeRect(CARD.wx, CARD.wy, CARD.ww, CARD.wh);
+  if (capP > 0) {
+    const spr = txt(cap, 'hand', 56 * K * s, { fill: '#4a3942' });
+    const w = spr.w / K / s, h = spr.h / K / s;
+    g.save(); g.beginPath(); g.rect(CARD.w / 2 - w / 2, 470, w * clamp01(capP), 130); g.clip();
+    g.drawImage(spr.c, CARD.w / 2 - w / 2, 535 - h / 2, w, h); g.restore();
+  }
+  g.restore();
+}
+const famPhoto = (g) => g.drawImage(IMG.family, FAM_SRC[0], FAM_SRC[1], FAM_SRC[2], FAM_SRC[3], CARD.wx, CARD.wy, CARD.ww, CARD.wh);
+const snapPhoto = (g) => g.drawImage(SNAP, CARD.wx, CARD.wy, CARD.ww, CARD.wh);
+function ensureSnap() {
+  if (!snapDirty) return;
+  const x = SNAP.getContext('2d');
+  x.setTransform(K, 0, 0, K, 0, 0); x.fillStyle = '#000'; x.fillRect(0, 0, W0, H0);
+  sceneS6b(x, T.B_PHR3 - 0.35);
+  snapDirty = false;
+}
+function scenePol(g, tb) {
+  ensureSnap();
+  // blurred, dimmed table of memories
+  tg.drawImage(SNAP, 0, 0, TINY.width, TINY.height);
+  g.save(); g.imageSmoothingQuality = 'high'; g.drawImage(TINY, -40, -22, W0 + 80, H0 + 44); g.restore();
+  g.fillStyle = 'rgba(26,12,24,.5)'; g.fillRect(0, 0, W0, H0);
+  const zp = esin((tb - T.B_SONG_END) / 1.47), bob = 1 - zp;
+  // global zoom into card B
+  const Wc = [CBF.x + 55 * Math.sin(CBF.r), CBF.y - 55 * Math.cos(CBF.r)];
+  const zs = Math.pow(W0 / CARD.ww, zp), zr = -CBF.r * zp;
+  const tx = lerp(Wc[0], CX, zp), ty = lerp(Wc[1], CY, zp);
+  g.save(); g.translate(tx, ty); g.rotate(zr); g.scale(zs, zs); g.translate(-Wc[0], -Wc[1]);
+  motes(g, tb, 30, 9, 1.1 * (1 - zp));
+  const r = rng(99);
+  for (let j = 0; j < 14; j++) {
+    const t0 = 8.2 + r() * 5, x0 = 80 + r() * 1760, sz = 34 + r() * 46, sp = 150 + r() * 110;
+    const d = tb - t0; if (d < 0 || d > 4.5) continue;
+    const a = Math.min(1, d / 0.6) * Math.min(1, (4.5 - d) / 1) * 0.55 * (1 - zp);
+    g.globalAlpha = a; g.drawImage(HEART, x0 + 30 * Math.sin(d * 2.2 + j) - sz / 2, 1120 - d * sp - sz / 2, sz, sz);
+  }
+  g.globalAlpha = 1;
+  // card A: from full screen to its place
+  const pa = esin((tb - (T.B_PHR3 - 0.35)) / 0.95);
+  const s0 = W0 / CARD.ww;
+  const ax = lerp(CX, CA.x, pa), ay = lerp(CY + 55 * s0, CA.y, pa), as = lerp(s0, 1, pa), ar = CA.r * pa;
+  const bobA = tb > 9 ? 4 * Math.sin(6.283 * 0.33 * tb) * bob : 0;
+  drawCard(g, ax, ay + bobA, as, ar, snapPhoto, /*CHARS:hand*/'公仔版', clamp01((tb - 8.95) / 0.6));
+  // card B slides in
+  const tb0 = T.B_PHR4 - 0.45;
+  if (tb >= tb0) {
+    const e = eback((tb - tb0) / 0.85, 1.2);
+    const bx = lerp(2500, CBF.x, e), by = lerp(640, CBF.y, e), br = lerp(18 * Math.PI / 180, CBF.r, e);
+    const bobB = tb > 11.4 ? 4 * Math.sin(6.283 * 0.3 * tb + 2) * bob : 0;
+    drawCard(g, bx, by + bobB, 1, br, famPhoto, /*CHARS:hand*/'本人版', clamp01((tb - 11.35) / 0.6));
+  }
+  for (const [tl, cx, cy] of [[9.0, CA.x, CA.y], [11.25, CBF.x, CBF.y]]) {
+    const d = tb - tl; if (d < 0 || d > 1.2 || zp > 0.4) continue;
+    const r2 = rng(Math.round(tl * 10));
+    for (let i = 0; i < 7; i++) {
+      const px = cx + (r2() - 0.5) * 940, py = cy + (r2() - 0.5) * 680, v = Math.sin(Math.PI * clamp01((d - r2() * 0.4) / 0.6)), s = 50 + r2() * 50;
+      if (v > 0) { g.globalCompositeOperation = 'lighter'; g.globalAlpha = 0.9 * v; g.drawImage(STAR, px - s / 2, py - s / 2, s, s); g.globalCompositeOperation = 'source-over'; g.globalAlpha = 1; }
+    }
+  }
+  g.restore();
+  drawConfetti(g, RAINP, tb);
+}
+function sceneFinal(g, tb) {
+  const p = esin((tb - 15.2) / 13);
+  const sc = 1 + 0.05 * p;
+  g.save(); g.translate(CX, 420); g.scale(sc, sc); g.translate(-CX, -420);
+  g.drawImage(IMG.family, FAM_SRC[0], FAM_SRC[1], FAM_SRC[2], FAM_SRC[3], 0, 0, W0, H0);
+  const blur = clamp01((tb - 21.4) / 0.8);
+  if (blur > 0) {
+    tg.drawImage(IMG.family, FAM_SRC[0], FAM_SRC[1], FAM_SRC[2], FAM_SRC[3], 0, 0, TINY.width, TINY.height);
+    g.globalAlpha = 0.75 * blur; g.imageSmoothingQuality = 'high'; g.drawImage(TINY, 0, 0, W0, H0); g.globalAlpha = 1;
+  }
+  g.restore();
+  if (!LAY.portrait) {
+    const a = clamp01((tb - 14.9) / 0.8) * (1 - blur);
+    if (a > 0) { const gr = g.createLinearGradient(0, 520, 0, H0); gr.addColorStop(0, 'rgba(20,8,18,0)'); gr.addColorStop(1, `rgba(20,8,18,${0.72 * a})`); g.fillStyle = gr; g.fillRect(0, 520, W0, H0 - 520); }
+  }
+  if (blur > 0) { g.fillStyle = `rgba(22,10,20,${0.62 * blur})`; g.fillRect(0, 0, W0, H0); }
+}
+
+// ------------------------------------------------------------------ frame assembly
+function inBuf(gx, fn, ...args) { gx.setTransform(K, 0, 0, K, 0, 0); gx.fillStyle = '#000'; gx.fillRect(0, 0, W0, H0); fn(gx, ...args); gx.setTransform(1, 0, 0, 1, 0, 0); }
+function renderStage(g, st) {
+  g.setTransform(K, 0, 0, K, 0, 0);
+  g.imageSmoothingEnabled = true; g.imageSmoothingQuality = 'medium';
+  if (st.seg === 'idle') { sceneS1(g, 0, st.idle); return; }
+  if (st.seg === 'A') {
+    const t = st.t;
+    if (t < T.T_S2) sceneS1(g, t, t);
+    else if (t < T.T_S3 - 0.15) sceneS2(g, t);
+    else if (t < T.T_S3 + 0.15 && !REDUCED) {
+      const p = esin((t - (T.T_S3 - 0.15)) / 0.3);
+      inBuf(ga, sceneS2, Math.min(t, T.T_S3 - 0.001)); inBuf(gb, sceneS3, Math.max(t, T.T_S3));
+      g.setTransform(1, 0, 0, 1, 0, 0);
+      const off = p * S.width, blur = Math.sin(Math.PI * p) * S.width * 0.06;
+      for (let i = 0; i < 6; i++) {
+        const o = (i / 5 - 0.5) * blur;
+        g.globalAlpha = i === 0 ? 1 : 1 / (i + 1);
+        g.drawImage(BA, -off + o, 0); g.drawImage(BB, S.width - off + o, 0);
+      }
+      g.globalAlpha = 1; g.setTransform(K, 0, 0, K, 0, 0);
+    } else if (t < T.T_S3 + 0.15) { dissolve(g, sceneS2, sceneS3, t, T.T_S3 - 0.15, 0.3, T.T_S3); }
+    else if (t < T.T_S4 - 0.2) sceneS3(g, t);
+    else if (t < T.T_S4 + 0.2) dissolve(g, sceneS3, sceneS4, t, T.T_S4 - 0.2, 0.4, T.T_S4, true);
+    else if (t < T.T_S5) sceneS4(g, t);
+    else if (t < T.T_W - 0.2) sceneS5(g, t);
+    else dissolve(g, sceneS5, (x, tt) => sceneW(x, tt - T.T_W, null, false), t, T.T_W - 0.2, 0.4, T.T_W);
+    return;
+  }
+  if (st.seg === 'W') {
+    if (st.w < 0.2) dissolve(g, sceneS5, (x, tt) => sceneW(x, tt - T.T_W, null, false), T.T_W + st.w, T.T_W - 0.2, 0.4, T.T_W);
+    else sceneW(g, st.w, null, st.hint);
+    return;
+  }
+  const tb = st.tb;
+  if (tb < T.B_HIT) sceneW(g, st.wBlow + tb, tb, false);
+  else if (tb < T.B_PHR3 - 0.35) {
+    sceneS6b(g, tb);
+    const d = tb - T.B_HIT;
+    if (d < 0.45) {
+      const a = d < 0.08 ? d / 0.08 : 1 - eout((d - 0.08) / 0.37);
+      const R = 300 + 1700 * eout(d / 0.3);
+      const gr = g.createRadialGradient(CX, 700, 0, CX, 700, R);
+      gr.addColorStop(0, `rgba(255,246,228,${0.95 * a})`); gr.addColorStop(0.55, `rgba(255,236,210,${0.6 * a})`); gr.addColorStop(1, 'rgba(255,236,210,0)');
+      g.fillStyle = gr; g.fillRect(0, 0, W0, H0);
+    }
+  } else if (tb < 15.2) scenePol(g, tb);
+  else sceneFinal(g, tb);
+}
+function dissolve(g, fa, fb, t, t0, dur, tcut, sparkly) {
+  const p = esin((t - t0) / dur);
+  inBuf(ga, fa, Math.min(t, tcut - 0.001)); inBuf(gb, fb, Math.max(t, tcut));
+  g.setTransform(1, 0, 0, 1, 0, 0);
+  g.globalAlpha = 1; g.drawImage(BA, 0, 0); g.globalAlpha = p; g.drawImage(BB, 0, 0); g.globalAlpha = 1;
+  g.setTransform(K, 0, 0, K, 0, 0);
+  if (sparkly) {
+    const k = Math.sin(Math.PI * clamp01((t - t0) / dur));
+    g.fillStyle = `rgba(255,240,230,${0.32 * k})`; g.fillRect(0, 0, W0, H0);
+    const r = rng(83); sparkles(g, Array.from({ length: 22 }, () => [r() * W0, r() * H0]), t * 3, 84, k, [50, 120], [0.8, 1.4]);
+  }
+}
+const FLASHES = [
+  { seg: 'A', t: T.T_S2, peak: 0.42, rise: 0.25, fall: 0.35, col: '255,232,240' },
+  { seg: 'A', t: T.T_S5, peak: 0.92, rise: 0.08, fall: 0.55, col: '255,255,255' },
+  { seg: 'B', t: T.B_PHR3 - 0.35, peak: 0.55, rise: 0.04, fall: 0.3, col: '255,255,255' },
+];
+function postFX(g, st) {
+  g.setTransform(K, 0, 0, K, 0, 0);
+  const vg = g.createRadialGradient(CX, CY, 520, CX, CY, 1150);
+  vg.addColorStop(0, 'rgba(18,6,16,0)'); vg.addColorStop(1, 'rgba(18,6,16,.34)');
+  g.fillStyle = vg; g.fillRect(0, 0, W0, H0);
+  const tnow = st.seg === 'A' ? st.t : st.seg === 'B' ? st.tb : null;
+  if (tnow != null) for (const f of FLASHES) {
+    if (f.seg !== st.seg) continue;
+    let a = 0;
+    if (tnow >= f.t - f.rise && tnow < f.t) a = f.peak * ein((tnow - (f.t - f.rise)) / f.rise);
+    else if (tnow >= f.t && tnow < f.t + f.fall) a = f.peak * (1 - eout((tnow - f.t) / f.fall));
+    if (a > 0) { g.fillStyle = `rgba(${f.col},${a})`; g.fillRect(0, 0, W0, H0); }
+  }
+  // film grain
+  if (!noisePat) noisePat = g.createPattern(NOISE, 'repeat');
+  const fr = Math.floor((st.seg === 'B' ? st.tb + 100 : (st.t || st.w || st.idle || 0)) * 24);
+  const r = rng(fr * 7 + 3);
+  g.save(); g.globalCompositeOperation = 'overlay'; g.globalAlpha = 0.085;
+  g.translate(-r() * 256, -r() * 256); g.fillStyle = noisePat; g.fillRect(0, 0, W0 + 512, H0 + 512); g.restore();
+  if (FILM && st.seg === 'A' && st.t < 0.9) { g.fillStyle = `rgba(0,0,0,${1 - esin(st.t / 0.9)})`; g.fillRect(0, 0, W0, H0); }
+}
+
+// ------------------------------------------------------------------ overlay type (captions, final message, credits)
+const CAPS = [
+  { seg: 'A', t0: T.A1_B0, t1: 4.05, text: /*CHARS:round*/'11/11 限定版・媽媽公仔' },
+  { seg: 'A', t0: 4.25, t1: 8.85, text: /*CHARS:round*/'全世界，只有一個' },
+  { seg: 'A', t0: T.T_S2 + 2.05, t1: T.T_S3 - 0.2, text: /*CHARS:round*/'秘密任務開始！' },
+  { seg: 'A', t0: T.T_S4 + 0.3, t1: T.T_S4 + 3.85, text: /*CHARS:round*/'派對準備完成！' },
+  { seg: 'B', t0: T.B_HIT + 0.35, t1: T.B_PHR3 - 0.42, text: /*CHARS:round*/'媽媽，生日快樂！' },
+];
+const WISH = /*CHARS:round*/'許個願吧';
+const FINAL = [
+  { t0: 15.0, t1: 21.3, text: /*CHARS:hand*/'全世界只有一個的妳', fam: 'hand', size: 66, ly: 0.695, py: 0.16, fill: '#fff6ee' },
+  { t0: 16.2, t1: 21.3, text: /*CHARS:round*/'生日快樂', fam: 'round', size: 140, ly: 0.81, py: 0.4, fill: '#ffffff', stroke: '#ef6b98', sw: 0.085, pop: true },
+  { t0: 17.4, t1: 21.3, text: /*CHARS:hand*/'愛妳的老公＆兒子', fam: 'hand', size: 46, ly: 0.915, py: 0.62, fill: '#fff6ee' },
+];
+const CREDITS = [[/*CHARS:hand*/'主演', /*CHARS:hand*/'媽媽'], [/*CHARS:hand*/'特別演出', /*CHARS:hand*/'老公・兒子'], [/*CHARS:hand*/'道具', /*CHARS:hand*/'草莓蛋糕'], [/*CHARS:hand*/'製作', /*CHARS:hand*/'愛妳的我們']];
+function capPos(frac, pfrac) {
+  const L = LAY;
+  if (!L.portrait) return { x: L.sx + L.sw / 2, y: L.sy + L.sh * frac, u: L.sh / H0 };
+  const top = L.sy + L.sh, avail = L.mh - top - L.Bt;
+  return { x: L.mw / 2, y: top + avail * pfrac, u: L.capU };
+}
+function capText(g, text, fam, size, pos, a, o, sc = 1, maxW) {
+  if (a <= 0.003) return;
+  let px = size * pos.u;
+  const spr0 = txt(text, fam, px, o);
+  const lim = (maxW || (LAY.portrait ? LAY.mw * 0.9 : LAY.sw * 0.92));
+  if (spr0.tw > lim) px *= lim / spr0.tw;
+  const spr = txt(text, fam, px, o);
+  g.save(); g.globalAlpha = a; g.translate(pos.x, pos.y); g.scale(sc, sc);
+  g.drawImage(spr.c, -spr.w / 2, -spr.h / 2); g.restore();
+}
+const CAP_STYLE = { fill: '#fff7ef', shadow: 'rgba(28,8,24,.82)' };
+function overlays(g, st) {
+  g.setTransform(1, 0, 0, 1, 0, 0);
+  const seg = st.seg;
+  const drawCap = (text, tt, t0, t1) => {
+    const a = fadeIO(tt, t0, t1, 0.45, 0.3);
+    if (a <= 0) return;
+    const pos = capPos(0.885, 0.3), rise = (1 - eout((tt - t0) / 0.6)) * 16 * pos.u;
+    capText(g, text, 'round', 64, { x: pos.x, y: pos.y + rise, u: pos.u }, a, CAP_STYLE, 0.985 + 0.015 * eout((tt - t0) / 0.6));
+  };
+  for (const c of CAPS) {
+    if (c.seg === seg) drawCap(c.text, seg === 'A' ? st.t : st.tb, c.t0, c.t1);
+  }
+  if (seg === 'W') drawCap(WISH, st.w, 0.45, 1e9);
+  if (seg === 'B' && st.tb < 0.5) drawCap(WISH, st.wBlow + st.tb, 0.45, st.wBlow + 0.38);
+  if (seg !== 'B') return;
+  const tb = st.tb;
+  for (const f of FINAL) {
+    const a = fadeIO(tb, f.t0, f.t1, f.pop ? 0.15 : 0.7, 0.45);
+    if (a <= 0) continue;
+    const pos = capPos(f.ly, f.py);
+    const rise = f.pop ? 0 : (1 - eout((tb - f.t0) / 0.9)) * 20 * pos.u;
+    const sc = f.pop ? 0.55 + 0.45 * eback((tb - f.t0) / 0.45, 2.2) : 1;
+    capText(g, f.text, f.fam, f.size, { x: pos.x, y: pos.y + rise, u: pos.u }, a, { fill: f.fill, stroke: f.stroke, sw: f.sw, shadow: 'rgba(28,8,24,.75)' }, sc);
+    if (f.pop && tb > f.t0 + 0.25) {
+      const sp = txt(f.text, f.fam, f.size * pos.u, {});
+      const beat = 1 + 0.08 * Math.pow(Math.max(0, Math.sin(6.283 * 1.2 * (tb - f.t0))), 6);
+      const hs = 92 * pos.u * eback((tb - f.t0 - 0.25) / 0.4, 2) * beat;
+      g.globalAlpha = a; g.drawImage(HEART, pos.x + sp.tw / 2 + 12 * pos.u, pos.y - hs * 0.58, hs, hs); g.globalAlpha = 1;
+    }
+  }
+  // credits roll
+  const L = LAY;
+  const cu = L.portrait ? L.capU * 0.9 : L.sh / H0;
+  const cx = L.portrait ? L.mw / 2 : L.sx + L.sw / 2;
+  const top = L.portrait ? 0 : L.sy, hgt = L.portrait ? L.mh : L.sh;
+  if (tb > 21.6 && tb < 28.2) {
+    const p = (tb - 21.6) / 6.0;
+    const y0 = top + hgt + 60 * cu - p * (hgt + 900 * cu);
+    CREDITS.forEach(([role, name], i) => {
+      const y = y0 + i * 200 * cu;
+      const a = clamp01(Math.min((y - top) / (hgt * 0.18), (top + hgt - y) / (hgt * 0.18)));
+      if (a <= 0) return;
+      capText(g, role, 'hand', 34, { x: cx, y, u: cu }, a, { fill: '#e9c27b', shadow: 'rgba(20,6,16,.7)' });
+      capText(g, name, 'hand', 60, { x: cx, y: y + 66 * cu, u: cu }, a, { fill: '#fff6ee', shadow: 'rgba(20,6,16,.7)' });
+    });
+  }
+  if (tb > 27.3) {
+    const a = clamp01((tb - 27.3) / 0.8);
+    const cy = top + hgt * 0.47;
+    capText(g, /*CHARS:script*/'Happy Birthday', 'script', 128, { x: cx, y: cy - 40 * cu, u: cu }, a, { fill: '#fff6ee', shadow: 'rgba(20,6,16,.75)' }, 0.96 + 0.04 * eout((tb - 27.3) / 0.8));
+    capText(g, /*CHARS:hand*/'2026.11.11', 'hand', 46, { x: cx, y: cy + 82 * cu, u: cu }, a, { fill: '#e9c27b', shadow: 'rgba(20,6,16,.7)' });
+  }
+}
+
+// ------------------------------------------------------------------ compose
+function drawFrame(st) {
+  renderStage(sg, st);
+  postFX(sg, st);
+  const L = LAY;
+  mg.setTransform(1, 0, 0, 1, 0, 0);
+  if (FILM) { mg.drawImage(S, 0, 0, L.mw, L.mh); }
+  else {
+    tg.drawImage(S, 0, 0, TINY.width, TINY.height);
+    mg.fillStyle = '#1b1220'; mg.fillRect(0, 0, L.mw, L.mh);
+    const cov = Math.max(L.mw / TINY.width, L.mh / TINY.height) * 1.08;
+    mg.imageSmoothingEnabled = true; mg.imageSmoothingQuality = 'high';
+    mg.globalAlpha = 0.85; mg.drawImage(TINY, (L.mw - TINY.width * cov) / 2, (L.mh - TINY.height * cov) / 2, TINY.width * cov, TINY.height * cov);
+    mg.globalAlpha = 1; mg.fillStyle = 'rgba(22,10,22,.58)'; mg.fillRect(0, 0, L.mw, L.mh);
+    mg.drawImage(S, L.sx, L.sy, L.sw, L.sh);
+  }
+  overlays(mg, st);
+  if (FILM && st.seg === 'B' && st.tb > T.B_LEN - 1.2) { mg.fillStyle = `rgba(0,0,0,${esin((st.tb - (T.B_LEN - 1.2)) / 1.15)})`; mg.fillRect(0, 0, L.mw, L.mh); }
+}
+
+// ------------------------------------------------------------------ loading
+async function loadVisuals(progress) {
+  const ents = Object.entries(IMG_LIST);
+  let done = 0;
+  await Promise.all(ents.map(([k, src]) => loadImg(k, src).then(() => progress(++done, ents.length))));
+  if (document.fonts) {
+    await Promise.all(['64px "BdayRound"', '64px "Iansui"', '64px "Pacifico"'].map(f => document.fonts.load(f, f.includes('Pacifico') ? 'Surprise!' : '媽媽生日快樂').catch(() => {})));
+    await document.fonts.ready;
+  }
+}
+
+// ------------------------------------------------------------------ film mode
+if (FILM) {
+  document.getElementById('ui').hidden = true;
+  window.__LEN = T.FILM_LEN;
+  window.__ready = loadVisuals(() => {}).then(() => { layout(); return true; });
+  window.__renderAt = (t) => {
+    let st;
+    if (t < T.T_W) st = { seg: 'A', t };
+    else if (t < T.T_W + T.LOOP_LEN) st = { seg: 'W', w: t - T.T_W, hint: false };
+    else st = { seg: 'B', tb: Math.min(t - T.T_W - T.LOOP_LEN, T.B_LEN), wBlow: T.LOOP_LEN };
+    drawFrame(st);
+    return true;
+  };
+  return;
+}
+
+// ------------------------------------------------------------------ live mode
+const $open = document.getElementById('open'), $openLabel = document.getElementById('openLabel');
+const $start = document.getElementById('start'), $hint = document.getElementById('hint'), $end = document.getElementById('end');
+const AC = window.AudioContext || window.webkitAudioContext;
+let actx = null, bufs = {}, nodes = [], loopNode = null, audioOK = false;
+let st = { seg: 'idle', idle: 0 };
+let t0A = 0, t0W = 0, t0B = 0, wBlow = 0, clockOff = 0;
+const now = () => actx && audioOK ? actx.currentTime : performance.now() / 1000 - clockOff;
+
+async function loadAudio(progress) {
+  if (!AC) return;
+  try {
+    actx = new AC();
+    const files = { A: 'assets/partA.mp3', L: 'assets/wish_loop.wav', B: 'assets/partB.mp3' };
+    let done = 0;
+    await Promise.all(Object.entries(files).map(async ([k, url]) => {
+      const ab = await (await fetch(url)).arrayBuffer();
+      bufs[k] = await new Promise((res, rej) => { const p = actx.decodeAudioData(ab, res, rej); if (p && p.then) p.then(res, rej); });
+      progress(++done, 3);
+    }));
+    audioOK = true;
+  } catch (e) { audioOK = false; }
+}
+function play(buf, when, loop = false) {
+  const s = actx.createBufferSource(); s.buffer = buf; s.loop = loop;
+  const gn = actx.createGain(); s.connect(gn); gn.connect(actx.destination); s.start(when);
+  const n = { s, gn }; nodes.push(n); return n;
+}
+function stopAll() { for (const n of nodes) { try { n.s.stop(); } catch (e) {} } nodes = []; loopNode = null; }
+function unlockAudio() {
+  try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}
+  if (!actx) return;
+  try { actx.resume(); const b = actx.createBuffer(1, 1, 22050), s = actx.createBufferSource(); s.buffer = b; s.connect(actx.destination); s.start(0); } catch (e) {}
+}
+let wake = null;
+async function keepAwake() { try { if (navigator.wakeLock) wake = await navigator.wakeLock.request('screen'); } catch (e) {} }
+function startShow() {
+  unlockAudio(); keepAwake();
+  stopAll(); $end.hidden = true; $hint.hidden = true;
+  if (!audioOK) clockOff = performance.now() / 1000;
+  const t = now() + 0.08;
+  t0A = t; t0W = t + T.T_W;
+  if (audioOK) { play(bufs.A, t0A); loopNode = play(bufs.L, t0W, true); }
+  st = { seg: 'A', t: 0 };
+  $start.classList.add('leaving'); setTimeout(() => { $start.hidden = true; }, 650);
+}
+function blow() {
+  if (st.seg !== 'W') return;
+  wBlow = now() - t0W;
+  t0B = now() + 0.02;
+  if (audioOK) {
+    play(bufs.B, t0B);
+    if (loopNode) { loopNode.gn.gain.setTargetAtTime(0, t0B, 0.07); try { loopNode.s.stop(t0B + 0.6); } catch (e) {} }
+  }
+  $hint.hidden = true;
+  st = { seg: 'B', tb: 0, wBlow };
+}
+function tick() {
+  const tn = now();
+  if (st.seg === 'idle') st.idle = performance.now() / 1000;
+  else if (st.seg === 'A') { st.t = Math.max(0, tn - t0A); if (st.t >= T.T_W) st = { seg: 'W', w: tn - t0W, hint: false }; }
+  else if (st.seg === 'W') {
+    st.w = tn - t0W;
+    if (st.w > 1.6 && $hint.hidden) $hint.hidden = false;
+    st.hint = st.w > 1.6;
+    if (st.w > 16) blow();
+  } else if (st.seg === 'B') {
+    st.tb = Math.min(tn - t0B, T.B_LEN - 1.1);
+    if (st.tb >= T.B_LEN - 1.6 && $end.hidden) { $end.hidden = false; }
+  }
+  try { drawFrame(st); } catch (e) { if (!tick.warned) { tick.warned = true; console.error(e); } }
+  requestAnimationFrame(tick);
+}
+$open.addEventListener('click', startShow);
+document.getElementById('replay').addEventListener('click', (e) => { e.stopPropagation(); startShow(); });
+main.addEventListener('pointerdown', () => { if (st.seg === 'W' && st.w > 0.6) blow(); });
+window.addEventListener('keydown', (e) => { if ((e.key === ' ' || e.key === 'Enter') && st.seg === 'W' && st.w > 0.6) { e.preventDefault(); blow(); } });
+window.addEventListener('resize', () => layout());
+document.addEventListener('visibilitychange', () => {
+  if (!actx || !audioOK) return;
+  if (document.hidden) actx.suspend().catch(() => {}); else if (st.seg !== 'idle') actx.resume().catch(() => {});
+});
+
+layout();
+requestAnimationFrame(function first() { mg.fillStyle = '#1b1220'; mg.fillRect(0, 0, LAY.mw, LAY.mh); });
+let vis = 0, aud = 0;
+const prog = () => { const p = Math.round(((vis * 0.8) + (aud * 0.2)) * 100); $openLabel.textContent = `準備中… ${p}%`; };
+Promise.all([
+  loadVisuals((d, n) => { vis = d / n; prog(); }),
+  loadAudio((d, n) => { aud = d / n; prog(); }),
+]).then(() => {
+  layout();
+  $open.disabled = false; $openLabel.textContent = '打開禮物';
+  requestAnimationFrame(tick);
+}).catch(() => { $openLabel.textContent = '載入失敗，請重新整理'; });
+})();
+</script>
+</body>
+</html>
